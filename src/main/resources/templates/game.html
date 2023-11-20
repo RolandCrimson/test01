@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>RockPaperScissors</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+  <script th:src="@{/js/bootstrap.min.js}"></script>
+  <script th:src="@{/js/rps-client.js}"></script>
+</head>
+
+<body onload="init()">
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>가위 바위 보 게임</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>오늘의 도전</h2>
+      <label for="rps">당신의 선택: </label>
+      <select name="rps_choice" id="rps" onchange="drawImage()" class="selectpicker">
+          <option value="0">선택</option>
+          <option value="가위">가위</option>
+          <option value="바위">바위</option>
+          <option value="보">보</option>
+      </select>
+      <img id="userImage" src="" width="55" height="65">
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <label for="opponentImage">컴퓨터 선택: </label>
+      <img id="opponentImage" src="" width="55" height="65"><br>
+      <p>
+        <form id="attempt-form">
+          <div class="form-group">
+            <label for="user">닉네임:</label>
+            <input type="text" name="user-alias" id="user" class="form-control">
+          </div>
+          <input type="button" value="확인" class="btn btn-outline-success" onclick="sendData()">
+        </form>
+      </p>
+      <div class="card text-dark bg-info">
+        <div class="card-body">
+          <h5 class="card-title">결과</h5>
+          <p class="card-text result-message"></p>
+        </div>
+      </div>
+      
+
+      <div id="stats-div" style="display: none;">
+        <h2>통계</h2>
+        <table id="stats" class="table">
+          <tbody>
+          <tr>
+            <td class="info">사용자 ID:</td>
+            <td id="stats-user-id"></td>
+          </tr>
+          <tr>
+            <td class="info">점수:</td>
+            <td id="stats-score"></td>
+          </tr>
+          <tr>
+            <td class="info">배지:</td>
+            <td id="stats-badges"></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <h3>리더보드</h3>
+      <table id="leaderboard" class="table">
+        <thead>
+          <tr>
+            <th>사용자 ID</th>
+            <th>점수</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboard-body"></tbody>
+      </table>
+      <div class="text-right">
+        <input id="refresh-leaderboard" class="btn btn-outline-success" type="button" 
+        value="새로고침"  onclick="updateLeaderBoard()">
+      </div>
+
+      <div id="results-div" style="display: none;">
+        <h2>최근 답안</h2>
+        <table id="results" class="table">
+          <thead>
+            <tr>
+              <th>답안 ID</th>
+              <th>사용자</th>
+              <th>컴퓨터</th>
+              <th>결과</th>
+            </tr>
+          </thead>
+          <tbody id="results-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
